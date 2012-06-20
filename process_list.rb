@@ -4,9 +4,14 @@ class ProcessList
   end
 
   def add_process(process_id, resource_id, hold_wait)
-    raise ArgumentError, 'hold wait must be either :hold or :wait' unless [:hold, :wait].include? hold_wait
-
-    hold_wait == :hold ? @graph.add_node(process_id, resource_id) : @graph.add_node(resource_id, process_id)
+    case hold_wait
+      when :hold
+        @graph.add_node(process_id, resource_id)
+      when :wait
+        @graph.add_node(resource_id, process_id)
+      else
+        raise ArgumentError, 'hold wait must be either :hold or :wait'
+    end
   end
 
   def is_deadlocked?
