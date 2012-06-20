@@ -1,3 +1,5 @@
+require './process_list.rb'
+
 describe ProcessList do
   it "wont allow anything but :wait or :hold" do
     lambda { subject.add_process(1, 1, :doesnt_exist) }.should raise_error
