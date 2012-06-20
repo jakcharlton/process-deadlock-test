@@ -30,5 +30,6 @@ describe ProcessList do
     subject.add_process(1, 2, :wait)
     subject.add_process(2, 1, :wait)
     subject.add_process(2, 2, :hold)
-  end
+    subject.is_deadlocked?.should == true
+ end
 end
